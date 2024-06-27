@@ -17,10 +17,10 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'IPP Setup of Rocky Linux with NI Hardware'
-copyright = 'IPP and UPM'
-author = 'UPM '
-release = '0.1'
+project = 'Building Embedded Linux using Buildroot'
+copyright = 'UPM'
+author = 'Mariano '
+release = '1.0'
 
 
 # -- General configuration ---------------------------------------------------
