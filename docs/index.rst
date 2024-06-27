@@ -6,8 +6,9 @@
 Configuration of Rocky Linux System with NI Software for NDS development
 ========================================================================
 
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-   nds-irio.rst
+   rpi.rst
