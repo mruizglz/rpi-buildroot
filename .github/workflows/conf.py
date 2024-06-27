@@ -26,7 +26,8 @@ release = '0.1'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ['myst_parser']
+extensions = ['myst_parser','rst2pdf.pdfbuilder']
+pdf_documents = [('index', u'rst2pdf', u'GettingStarted', u'Mariano Ruiz'),]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
