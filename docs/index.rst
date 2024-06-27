@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Configuration of Rocky Linux System with NI Software for NDS development
-========================================================================
+Buiding Embedded Linux Distribution for RPI using Buildroot
+===========================================================
 
 .. toctree::
    :maxdepth: 2
