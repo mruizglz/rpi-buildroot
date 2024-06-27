@@ -1,4 +1,4 @@
-# Configuration file for the Sphinx documentation builder.
+ation of RPI# Configuration file for the Sphinx documentation builder.
 #
 # This file only contains a selection of the most common options. For a full
 # list see the documentation:
@@ -17,9 +17,9 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'IPP Setup of Rocky Linux with NI Hardware'
-copyright = 'IPP and UPM'
-author = 'UPM '
+project = 'Documentation of RPI'
+copyright = 'UPM'
+author = 'Mariano Ruiz '
 release = '0.1'
 
 
