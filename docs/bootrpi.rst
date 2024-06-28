@@ -1,5 +1,6 @@
-Booting the Raspberry Pi.
--------------------------
+========================
+Booting the Raspberry Pi
+========================
 
 Fig. 11 displays a Raspberry Pi. The description of this card, its
 functionalities, interfaces, and connectors are explained in the ref

@@ -1,17 +1,7 @@
-.. image:: rpi-images/media/image1.jpeg
 
-**Acknowledgements**
-
-
-
-|image1|\ Embedded Linux Systems: Using Buildroot for building Embedded
-Linux Systems on Raspberry Pi 3 Model B by Mariano Ruiz is licensed
-under a `Creative Commons Attribution-ShareAlike 4.0 International
-License <http://creativecommons.org/licenses/by-sa/4.0/>`__.
-
-
+=================
 Document Overview
------------------
+=================
 
 This document describes the steps to develop an embedded Linux-based
 system using the Raspberry PI board. The document has been specifically
@@ -30,6 +20,8 @@ Read all the instructions carefully before executing the practical part;
 otherwise, you will find errors and probably unpredicted errors. In
 parallel, you need to review the slides available at the Moodle site or
 at [RD1]
+
+.. image:: rpi-images/media/image1.jpeg
 
 Acronyms
 --------
