@@ -11,3 +11,5 @@ Buiding Embedded Linux Distribution for RPI using Buildroot
    :caption: Contents:
 
    rpi.rst
+   setup.rst 
+   bootrpi.rst
