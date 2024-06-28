@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building linux using buildroot &mdash; Building Embedded Linux using Buildroot 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Booting the Raspberry Pi" href="bootrpi.html" />
+    <link rel="prev" title="Document Overview" href="rpi.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Building Embedded Linux using Buildroot
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="rpi.html">Document Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Building linux using buildroot</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#elements-needed-for-the-execution-of-these-labs">Elements needed for the execution of these LABS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#starting-the-vmware">Starting the VMware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-buildroot-for-rpi3">Configuring Buildroot for RPI3.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compiling-buildroot">Compiling buildroot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#buildroot-output">Buildroot Output.</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bootrpi.html">Booting the Raspberry Pi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eclipse.html">Using the integrated development environment Eclipse/CDT</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Building Embedded Linux using Buildroot</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Building linux using buildroot</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/setup.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="building-linux-using-buildroot">
+<h1>Building linux using buildroot<a class="headerlink" href="#building-linux-using-buildroot" title="Link to this heading"></a></h1>
+<section id="elements-needed-for-the-execution-of-these-labs">
+<h2>Elements needed for the execution of these LABS<a class="headerlink" href="#elements-needed-for-the-execution-of-these-labs" title="Link to this heading"></a></h2>
+<p>In order to execute this lab properly, you need the following elements:</p>
+<ol class="arabic simple">
+<li><p>The VMware player software version 16.0 or above. Available at
+<a class="reference external" href="http://www.wmware.com">www.wmware.com</a> (free download and use).
+This software has already been installed on the laboratory desktop
+computer.</p></li>
+<li><p>A VMWare virtual machine with Ubuntu 22.04 and all the software
+packages installed is already available on the Desktop. This virtual
+machine is available for your personal use. If you want to set up
+your virtual machine by yourself, follow the instructions provided in
+<a class="reference external" href="#_annex_i:_Ubuntu">Annex I</a>.</p></li>
+<li><p>A Raspberry Pi, accessories and a USB cable are available at the
+laboratory.</p></li>
+<li><p>Basic knowledge of Linux commands.</p></li>
+</ol>
+</section>
+<section id="starting-the-vmware">
+<h2>Starting the VMware<a class="headerlink" href="#starting-the-vmware" title="Link to this heading"></a></h2>
+<p>Start VMware Player and open the RPI Virtual Machine. Wait until the
+welcome screen is displayed (see Fig. 1 and Fig. 2). Login as
+“<em>ubuntu”</em> user using the password “ubuntu”.</p>
+<a class="reference internal image-reference" href="_images/image4.png"><img alt="A screenshot of a computer Description automatically generated" src="_images/image4.png" style="width: 4.92027in; height: 3.97031in;" /></a>
+<p>Fig. 1: Main screen of VMware player with some VM available to be
+executed.</p>
+<a class="reference internal image-reference" href="_images/image5.png"><img alt="A screenshot of a computer Description automatically generated" src="_images/image5.png" style="width: 6.69375in; height: 3.69514in;" /></a>
+<p>Fig. 2: Ubuntu Virtual Machine login screen.</p>
+<p>Open the <strong>Firefox</strong> web browser and download from
+<a class="reference external" href="https://buildroot.org/">https://buildroot.org/</a>, the version identified as <strong>buidlroot2023-08-3</strong>
+(use the download link, see Fig. 3, and navigate searching for earlier
+releases if necessary, <a class="reference external" href="https://buildroot.org/downloads/">https://buildroot.org/downloads/</a> ). Save the file
+to the <strong>Documents</strong> folder in your account (Fig. 4).</p>
+<a class="reference internal image-reference" href="_images/image6.png"><img alt="_images/image6.png" src="_images/image6.png" style="width: 5.97015in; height: 4.03801in;" /></a>
+<p>Fig. 3 Buildroot home page.</p>
+<p>Buildroot is a tool to generate embedded Linux systems in our PC, and
+then this Linux will be installed in the target.</p>
+<a class="reference internal image-reference" href="_images/image7.png"><img alt="_images/image7.png" src="_images/image7.png" style="width: 5.25472in; height: 3.28499in;" /></a>
+<p>Fig. 4: Example of Downloading buildroot source code.</p>
+<p>Create a folder “rpi” in “Documentes”. Copy the file to the
+“Documents/rpi” folder and decompress the file (Fig. 5).</p>
+<a class="reference internal image-reference" href="_images/image8.png"><img alt="A screenshot of a computer Description automatically generated" src="_images/image8.png" style="width: 6.69375in; height: 3.43958in;" /></a>
+<p>Fig. 5: Buildroot folder (the folder name depends on the version
+downloaded).</p>
+<p>Right-click in the window and execute “Open in Terminal” or execute the
+Terminal application from Dash home as shown in Fig. 6 (if “Open in
+Terminal” is not available, search how to install it in Ubuntu).</p>
+<a class="reference internal image-reference" href="_images/image9.png"><img alt="_images/image9.png" src="_images/image9.png" style="width: 4.20139in; height: 3.25347in;" /></a>
+<p>Fig. 6: Dash home, Terminal application</p>
+<p>In some seconds, a command window is displayed. Then, execute these
+commands:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><a href="#id1"><span class="problematic" id="id2">|im
+age3|</span></a></p></th>
+<th class="head"><p><strong>[Help]:</strong> For this course, you will need to become
+familiar with the Linux Terminal use. On the Moodle site of
+this course, you can find a cheat sheet with the basic Linux
+commands.</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><a href="#id3"><span class="problematic" id="id4">|im
+age4|</span></a></p></th>
+<th class="head"><p><strong>[Help]:</strong> In a Linux terminal, the “TAB” key helps you to
+autocomplete the commands, folders, and file names. You can
+find a description of “make” application at this link
+<a class="reference external" href="https://www.gnu.org/software/make/manual/make.pdf">https://www.gnu.org/software/make/manual/make.pdf</a></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>In some seconds, you will see a new window similar to Fig. 7.</p>
+<a class="reference internal image-reference" href="_images/image10.png"><img alt="A screenshot of a computer Description automatically generated" src="_images/image10.png" style="width: 6.69375in; height: 3.20208in;" /></a>
+<p>Fig. 7: Buildroot setup screen.</p>
+</section>
+<section id="configuring-buildroot-for-rpi3">
+<h2>Configuring Buildroot for RPI3.<a class="headerlink" href="#configuring-buildroot-for-rpi3" title="Link to this heading"></a></h2>
+<p>Once the <strong>Buildroot</strong> configuration is started, it is necessary to
+configure the different items. You need to navigate the different menus
+and select the installation elements. Table I contains the specific
+configuration of <strong>Buildroot</strong> for installing it in the Raspberry Pi.
+Depending on the downloaded version, the organization and the items
+displayed can differ. If an item of buildroot configuration does not
+appear in the Table I leaves it with its default value.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><a href="#id5"><span class="problematic" id="id6">|im
+age5|</span></a></p></th>
+<th class="head"><p><strong>[Help]:</strong> The Buildroot configuration is an iterative
+process. In order to set up your embedded Linux system, you
+will need to execute the configuration several times.</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Main
+Item</strong></p></th>
+<th class="head"><p><strong>Subitem</strong></p></th>
+<th class="head"><p><strong>Value</strong></p></th>
+<th class="head"><p><strong>Comments</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>T
+arget</strong>
+options</p></td>
+<td><p>Target
+A
+rchitecture</p></td>
+<td><p>AArch64 (little endian)</p></td>
+<td><p>ARM 64 bits</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Target
+A
+rchitecture
+Variant</p></td>
+<td><p>Cortex-A53</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Flo
+ating-point
+strategy</p></td>
+<td><p>VFPv4</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>MMU Page
+Size</p></td>
+<td><p>4kB</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Target
+Binary
+Format</p></td>
+<td><p>elf</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>Tool
+chain</strong></p></td>
+<td></td>
+<td></td>
+<td><p>Cross Compiler,
+linker, and
+libraries to be
+built to compile
+our embedded
+application</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Toolchain
+Type</p></td>
+<td><p>Buildroot toolchain</p></td>
+<td><p>The Embedded
+system will be
+compiled with
+tools integrated
+into Buildroot</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Custom
+toolchain
+vendor name</p></td>
+<td><p>buidlroot</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>C library</p></td>
+<td><p>glibc</p></td>
+<td><p>Library
+containing the
+typical C
+libraries used in
+Linux
+environments
+(stdlib, stdio,
+etc)</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Kernel
+Headers</p></td>
+<td><p>Same as kernel being
+built</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Custom
+Kernel
+Headers
+Series</p></td>
+<td><p>5.10.x</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Binutils
+Version</p></td>
+<td><p>binutils 2.40</p></td>
+<td><p>Binutils contains
+tools to manage
+the binary files
+obtained in the
+compilation of
+the different
+applications</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>GCC
+compiler
+Version</p></td>
+<td><p>gcc 12.x</p></td>
+<td><p>GCC tools version
+to be installed</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Enable C++
+support</p></td>
+<td><p>Yes</p></td>
+<td><p>Including support
+for C++
+programming,
+compiling, and
+linking.</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Build cross
+gdb for the
+host</p></td>
+<td><p>yes</p>
+<p>Add Python support</p>
+</td>
+<td><p>Includes the
+support for GDB.
+GCC debugger.</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>GDB
+debugger
+version</p></td>
+<td><p>Gdb 11.x</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Build
+op
+tions</strong></p></td>
+<td></td>
+<td><p>Default values</p></td>
+<td><p>How Buildroot
+will build the
+code. Leave
+default values.</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+<p><em>System
+C
+onfigur
+ation*</em></p>
+</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Root
+filesystem
+skeleton</p></td>
+<td><p>Default target skeleton</p></td>
+<td><p>Linux folder
+organization for
+the embedded
+system</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>System
+Hostname</p></td>
+<td><p><strong>buildroot</strong></p></td>
+<td><p>Name of the
+embedded system</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>System
+Banner</p></td>
+<td><p><strong>Linux RPI 3</strong></p></td>
+<td><p>Banner</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Passwords
+encoding</p></td>
+<td><p>sha-256</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Init System</p></td>
+<td><p>Busybox</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>/dev
+management</p></td>
+<td><p>Dynamic using devtmpfs
++ mdev</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Path to
+permissions
+table</p></td>
+<td><p><strong>sy
+stem/device_table.txt</strong></p></td>
+<td><p>Text files with
+permissions for
+/dev files</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Enable root
+login with
+password</p></td>
+<td><p>Yes</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Root
+password</p></td>
+<td><p><strong>rpi</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>/bin/sh</p></td>
+<td><p>Busybox’ default shell</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Run a
+getty: Port
+to run a
+getty</p></td>
+<td><p><strong>tty PORT: console</strong></p>
+<p><strong>Keep kernel default</strong></p>
+<p><strong>vt100</strong></p>
+</td>
+<td><p>Linux device file
+with the port to
+run getty (login)
+process.</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>remount
+root
+filesystem
+read-write
+during boot</p></td>
+<td><p>Yes</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Network
+interface
+to
+configure
+trough DHCP</p></td>
+<td><p>eth0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Set the
+system’s
+default
+PATH</p></td>
+<td><p>/bin:/
+sbin:/usr/bin:/usr/sbin</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Purge
+unwanted
+locales</p></td>
+<td><p>Yes</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Custom
+scripts to
+run before
+creating
+filesystem
+images</p></td>
+<td><p>&lt;<a href="#id15"><span class="problematic" id="id16">path_to_</span></a>
+buidlroot&gt;/board/raspbe
+rrypi3-64/post-build.sh</p></td>
+<td><p>&lt;p
+ath_to_buidlroot&gt;
+path where
+buildroot source
+is</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Custom
+scripts to
+run inside
+the
+fakeroot
+environment</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Custom
+scripts to
+run after
+creating
+filesystem
+images</p></td>
+<td><p>&lt;<a href="#id17"><span class="problematic" id="id18">path_to_</span></a>
+buidlroot&gt;/board/raspbe
+rrypi3-64/post-image.sh</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Linux
+K
+ernel</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Kernel
+Version</p></td>
+<td><p><strong>Custom tarball</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>URL of
+custom
+kernel
+tarball</p></td>
+<td><p><strong>$(call
+github,
+raspberrypi,linux,0b54d
+bda3cca2beb51e236a25738
+784e90853b64)/linux-0b5
+4dbda3cca2beb51e236a257
+38784e90853b64.tar.gz</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Kernel
+co
+nfiguration</p></td>
+<td><p>Using and in-tree
+defconfig file</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Defconfig
+name</p></td>
+<td><p><strong>bcmrpi3</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Kernel
+binary
+format</p></td>
+<td><p>Image</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Kernel
+compression
+format</p></td>
+<td><p>Gzip compression</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Build a
+Device Tree
+Blob (DTB)</p></td>
+<td><p>yes</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>In-tree
+Device Tree
+Source file
+names</p></td>
+<td><p>b
+roadcom/bcm2710-rpi-3-b
+broadc
+om/bcm2710-rpi-3-b-plus
+b
+roadcom/bcm2837-rpi-3-b</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Need host
+OpenSSL</p></td>
+<td><p>Yes</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Linux
+Kernel
+Extensions</p></td>
+<td><p>Nothing</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Linux
+Kernel
+Tools</p></td>
+<td><p>Nothing</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><ul class="simple">
+<li></li>
+</ul>
+<p><em>Target
+Pac
+kages*</em></p>
+</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Busybox</p></td>
+<td><p>yes</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Busybox
+co
+nfiguration
+file to use</p></td>
+<td><p><strong>package/b
+usybox/busybox.config</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Audio and
+video
+a
+pplications</p></td>
+<td><p>Default values</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>C
+ompresssors
+and
+de
+compressors</p></td>
+<td><p>Default values</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Debugging,
+profiling
+and
+benchmark</p></td>
+<td><p><strong>gdb, gdbserver</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>D
+evelopments
+tools</p></td>
+<td><p>Default values</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Filesystem
+and flash
+utilities</p></td>
+<td><p>Default values</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Games</p></td>
+<td><p>Default values</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Graphic
+libraries
+and
+a
+pplications
+(gr
+aphic/text)</p></td>
+<td><p>Default values</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Hardware
+handling</p></td>
+<td><p><strong>F
+irmware-&gt;rpi-firmware</strong></p>
+<p><strong>rpi 0/1/2/3
+(bootcode.bin, Default,
+Extended)</strong></p>
+<p><strong>Path to a file stores
+as boot/config.txt
+board/raspberrypi3-
+64/config_3_64bit.txt</strong></p>
+<p><strong>Path to a file stored
+as boot/cmdline.txt
+board/ra
+spberrypi/cmdline.txt</strong></p>
+<p><strong>install DTB
+overlays</strong></p>
+</td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>I
+nterpreters
+language
+and
+scripting</p></td>
+<td><p>Default values</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Libraries</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Mi
+scellaneous</p></td>
+<td><p>Default</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Networking
+a
+pplications</p></td>
+<td><p><strong>ifupdown scripts</strong></p>
+<p><strong>open ssh</strong></p>
+</td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Package
+managers</p>
+<p>Real Time</p>
+<p>Shell and
+utilities</p>
+<p>System
+Tools</p>
+<p>Text
+Editors and
+viewers</p>
+</td>
+<td><p>Default</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Fil
+esystem
+I
+mages</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>ext2/3/4
+root
+filesystem</p></td>
+<td><p>ext4</p>
+<p>exact size <strong>400M</strong></p>
+<p>Compression method <strong>no
+compression</strong></p>
+<p><strong>Remaining values-&gt;
+default</strong></p>
+</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>tar the
+root
+filesystem</p></td>
+<td><p>no compression</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>Host
+util
+ities</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>host
+genimage</p></td>
+<td><p>Yes</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>host
+dosfstools</p></td>
+<td><p>Yes</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>host mtools</p></td>
+<td><p>Yes</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Host
+enviro
+nment-setup</p></td>
+<td><p>Yes</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><ul class="simple">
+<li></li>
+</ul>
+<p><em>Legacy
+config
+op
+tions*</em></p>
+</td>
+<td></td>
+<td><p>Default values</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Once you have configured all the menus, you need to exit, saving the
+values (File-&gt;Quit).</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><a href="#id7"><span class="problematic" id="id8">|im
+age6|</span></a></p></th>
+<th class="head"><p><strong>[Help]:</strong> The <strong>Buildroot</strong> configuration is stored in a
+file named “.config”. You should have a backup of this file.</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="compiling-buildroot">
+<h2>Compiling buildroot<a class="headerlink" href="#compiling-buildroot" title="Link to this heading"></a></h2>
+<p>In the Terminal Window executes the following command:</p>
+<p>If everything is correct, you will see a final window similar to the one
+represented in Fig. 8.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><a href="#id9"><span class="problematic" id="id10">|im
+age7|</span></a></p></th>
+<th class="head"><p><strong>[Time for this step]:</strong> In this step, buildroot will
+connect, using the internet, to different repositories.
+After downloading the code, Buildroot will compile the
+applications and generate a lot of files and folders.
+Depending on your internet speed access and the
+configuration chosen, this step could take up to <strong>one hour
+and a half</strong>.</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><a href="#id11"><span class="problematic" id="id12">|im
+age8|</span></a></p></th>
+<th class="head"><p>Warning. If you have errors in the buildroot configuration,
+you could obtain errors in this compilation phase. Check
+your configuration correctly. Use “make clean” to clean up
+your partial compilation.</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><a href="#id13"><span class="problematic" id="id14">|im
+age9|</span></a></p></th>
+<th class="head"><p>Warning. dl subfolder in your buildroot folder contains all
+the packages downloaded for the internet. If you want to
+move your buildroot configuration from one computer to
+another, avoiding the copy of the virtual machine, you can
+copy this folder.</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<a class="reference internal image-reference" href="_images/image12.png"><img alt="_images/image12.png" src="_images/image12.png" style="width: 6.68125in; height: 4.46389in;" /></a>
+<p>Fig. 8: Successful compilation and installation of Buildroot</p>
+<p><strong>Buildroot</strong> has generated some folders with different files and
+subfolders containing the tools for generating your Embedded Linux
+System. The next paragraph explains the main outputs obtained,</p>
+</section>
+<section id="buildroot-output">
+<h2>Buildroot Output.<a class="headerlink" href="#buildroot-output" title="Link to this heading"></a></h2>
+<p>The main output files of the execution of the previous steps can be
+located in the folder “./images”. Fig. 9 summarizes the use of
+<strong>Buildroot</strong>. Buildroot generates a bootloader, a kernel image, and a
+file system.</p>
+<a class="reference internal image-reference" href="_images/image13.emf"><img alt="_images/image13.emf" src="_images/image13.emf" style="width: 5.77292in; height: 1.81806in;" /></a>
+<p>Fig. 9: Schematic representation of the Buildroot tool. Buildroot
+generates the root file system, the kernel image, the bootloader, and
+the toolchain. Figure copied from “Bootlin” training materials
+(<a class="reference external" href="http://bootlins.com/training/">http://bootlin.com/training/</a>)</p>
+<p>In our specific case, the folder content is shown in Fig. 10</p>
+<a class="reference internal image-reference" href="_images/image14.png"><img alt="A screenshot of a computer Description automatically generated" src="_images/image14.png" style="width: 5.98081in; height: 3.1266in;" /></a>
+<p>Fig. 10: The images folder contains the binary files for our embedded
+system.</p>
+<p>Copy the sdcard.img file to your SDcard using this Linux command in the
+Buildroot folder (sdb is typically the device assigned to the sdcard,
+unless you have other removable devices connected to the system):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo dd if=./images/sdcard.img of=/dev/sd&lt;x&gt; bs=10M //&lt;x&gt; is the identification used by Linux for your microSD card, tipically “b” or “c”, never use “a” because this is the operating system hardisk
+</pre></div>
+</div>
+<p>Remember to format again the microSDcard if you need to repeat this
+process (linux gparted is an excellent tool to partition and format the
+SD card).</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rpi.html" class="btn btn-neutral float-left" title="Document Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bootrpi.html" class="btn btn-neutral float-right" title="Booting the Raspberry Pi" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright UPM.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
