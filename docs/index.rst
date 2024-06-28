@@ -13,3 +13,4 @@ Buiding Embedded Linux Distribution for RPI using Buildroot
    rpi.rst
    setup.rst 
    bootrpi.rst
+   eclipse.rst
